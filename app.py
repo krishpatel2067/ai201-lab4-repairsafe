@@ -59,29 +59,30 @@ def _tier_html(tier: str, reason: str) -> str:
     note = cfg["note"]
     reason_block = (
         f'<p style="margin:8px 0 0 0;color:#374151;font-size:0.9em;">'
-        f'<strong>Why:</strong> {reason}</p>'
+        f"<strong>Why:</strong> {reason}</p>"
         if reason and tier in ("safe", "caution", "refuse")
         else ""
     )
     return (
         f'<div style="font-family:sans-serif;padding:14px 18px;'
-        f'border-left:5px solid {color};background:#f9fafb;'
+        f"border-left:5px solid {color};background:#f9fafb;"
         f'border-radius:0 8px 8px 0;margin-bottom:4px;">'
         f'  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">'
         f'    <span style="font-size:1.25em;">{icon}</span>'
         f'    <span style="background:{color};color:white;padding:3px 14px;'
         f'border-radius:12px;font-weight:700;font-size:0.9em;letter-spacing:0.06em;">'
-        f'{label}</span>'
-        f'  </div>'
+        f"{label}</span>"
+        f"  </div>"
         f'  <p style="margin:4px 0 0 0;color:#6b7280;font-size:0.85em;">{note}</p>'
-        f'  {reason_block}'
-        f'</div>'
+        f"  {reason_block}"
+        f"</div>"
     )
 
 
 # ---------------------------------------------------------------------------
 # Core pipeline
 # ---------------------------------------------------------------------------
+
 
 def handle_question(question: str):
     if not question.strip():
@@ -107,6 +108,7 @@ def handle_question(question: str):
 # ---------------------------------------------------------------------------
 # Tier guide content (loaded once at startup)
 # ---------------------------------------------------------------------------
+
 
 def _load_tier_guide() -> str:
     try:
@@ -137,8 +139,7 @@ CSS = """
 
 with gr.Blocks(title="RepairSafe") as demo:
 
-    gr.Markdown(
-        """
+    gr.Markdown("""
 # 🔧 RepairSafe
 **AI201 Lab 4 — Home Repair Safety Assistant**
 
@@ -149,8 +150,7 @@ Before the safety layer works, complete the milestones:
 - **Milestone 1:** Implement `classify_safety_tier()` in `safety.py`
 - **Milestone 2:** Implement `generate_safe_response()` in `responder.py`
 - **Milestone 3:** Implement `log_interaction()` in `auditor.py`
-        """
-    )
+        """)
 
     with gr.Tabs():
 
@@ -199,16 +199,14 @@ Before the safety layer works, complete the milestones:
             )
 
         with gr.Tab("Tier Guide"):
-            gr.Markdown(
-                """
+            gr.Markdown("""
 Use this reference while building your classifier. The taxonomy here defines
 what each tier means, gives concrete examples for each, and walks through the
 edge cases where the **caution/refuse boundary** is most easily confused.
 
 Your `classify_safety_tier()` prompt in `safety.py` needs to capture these
 distinctions — especially the "replacing existing" vs. "adding new" contrast.
-                """
-            )
+                """)
             gr.Markdown(TIER_GUIDE_CONTENT)
 
 if __name__ == "__main__":

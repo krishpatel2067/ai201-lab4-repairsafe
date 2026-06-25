@@ -39,11 +39,11 @@ All three stages are required for the system to behave correctly. A classifier w
 
 ## The Three-Tier Model
 
-| Tier | Definition | Examples |
-|------|------------|---------|
-| `safe` | Routine maintenance and low-risk repairs. Most homeowners can complete these without specialized training or tools. | Patching drywall, painting, replacing a light bulb, unclogging a drain, tightening hardware, replacing weather stripping |
-| `caution` | Repairs where mistakes are costly, require some skill, or involve mild risk of injury. Doable for motivated homeowners, but worth careful consideration. | Replacing a faucet, resetting a GFCI outlet, replacing a toilet flapper, installing a ceiling fan, basic tile work |
-| `refuse` | Repairs where an amateur mistake can cause fire, flooding, structural failure, injury, or death — or where local code requires a licensed professional. | Electrical panel work, gas line repair, structural modifications, main water line work, load-bearing wall removal, roof framing |
+| Tier      | Definition                                                                                                                                               | Examples                                                                                                                        |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `safe`    | Routine maintenance and low-risk repairs. Most homeowners can complete these without specialized training or tools.                                      | Patching drywall, painting, replacing a light bulb, unclogging a drain, tightening hardware, replacing weather stripping        |
+| `caution` | Repairs where mistakes are costly, require some skill, or involve mild risk of injury. Doable for motivated homeowners, but worth careful consideration. | Replacing a faucet, resetting a GFCI outlet, replacing a toilet flapper, installing a ceiling fan, basic tile work              |
+| `refuse`  | Repairs where an amateur mistake can cause fire, flooding, structural failure, injury, or death — or where local code requires a licensed professional.  | Electrical panel work, gas line repair, structural modifications, main water line work, load-bearing wall removal, roof framing |
 
 ### Why three tiers, not two?
 
@@ -51,7 +51,7 @@ A binary safe/unsafe classification loses important nuance. "Replacing a faucet"
 
 ### The caution/refuse boundary
 
-This is the most consequential classification decision, and the one your classifier will get wrong most often at first. The key question is: *if this repair goes wrong, does it risk fire, flood, structural failure, injury, or death?* If yes: refuse. If the worst case is a leaky pipe or a broken fixture: caution.
+This is the most consequential classification decision, and the one your classifier will get wrong most often at first. The key question is: _if this repair goes wrong, does it risk fire, flood, structural failure, injury, or death?_ If yes: refuse. If the worst case is a leaky pipe or a broken fixture: caution.
 
 ---
 
@@ -65,15 +65,15 @@ This is the most consequential classification decision, and the one your classif
 
 ## What You're Building
 
-**`classify_safety_tier(question)` → `safety.py`** *(Milestone 1)*
+**`classify_safety_tier(question)` → `safety.py`** _(Milestone 1)_
 
-Uses the Groq LLM to classify the question into a tier. This is an *LLM-as-judge* pattern: you're using a language model to evaluate input rather than generate output for end users. The quality of your classifier depends almost entirely on your prompt — specifically, how precisely you define the tier boundaries and what output format you request.
+Uses the Groq LLM to classify the question into a tier. This is an _LLM-as-judge_ pattern: you're using a language model to evaluate input rather than generate output for end users. The quality of your classifier depends almost entirely on your prompt — specifically, how precisely you define the tier boundaries and what output format you request.
 
-**`generate_safe_response(question, tier)` → `responder.py`** *(Milestone 2)*
+**`generate_safe_response(question, tier)` → `responder.py`** _(Milestone 2)_
 
 Calls the LLM with a tier-specific system prompt. The response behavior is fundamentally different for each tier. The "refuse" system prompt is the hardest to get right: it must prevent the LLM from providing dangerous instructions while still being genuinely useful to the user. An LLM that says "you should hire a professional — but here's how to do it anyway" has defeated the entire safety layer.
 
-**`log_interaction(question, tier, response)` → `auditor.py`** *(Milestone 3)*
+**`log_interaction(question, tier, response)` → `auditor.py`** _(Milestone 3)_
 
 Appends a structured record to `logs/audit.jsonl`. Audit logs are a production AI requirement — they're how you catch systematic errors after deployment, monitor for unexpected behavior, and demonstrate accountability if something goes wrong.
 
@@ -102,6 +102,7 @@ The key difference at production scale is that the safety classifier is usually 
 Production AI systems in high-stakes domains are expected to be auditable. "The model decided to answer that question" is not an acceptable explanation.
 
 Audit logs serve several functions:
+
 - **Error detection:** If your classifier is systematically wrong about a certain type of question, you'll see it in the log before users notice
 - **Accountability:** If a user reports a harmful response, you can reconstruct exactly what happened
 - **Improvement:** Reviewing logged interactions is one of the primary ways production teams identify where a classifier needs retraining
@@ -116,7 +117,7 @@ The patterns you're building here are exactly what Project 4 extends — so it's
 
 **What carries forward directly:**
 
-- **LLM-as-judge classifier → Detection signal 1.** The `classify_safety_tier()` function you're building in this lab is an instance of the *LLM-as-judge* pattern: using a language model to evaluate input rather than generate output for end users. Project 4 calls this same pattern a "detection signal." Your Groq-based classifier here is the same architecture as Project 4's first detection signal. Same API call, same output parsing, different domain.
+- **LLM-as-judge classifier → Detection signal 1.** The `classify_safety_tier()` function you're building in this lab is an instance of the _LLM-as-judge_ pattern: using a language model to evaluate input rather than generate output for end users. Project 4 calls this same pattern a "detection signal." Your Groq-based classifier here is the same architecture as Project 4's first detection signal. Same API call, same output parsing, different domain.
 
 - **Audit logging → Production audit log.** The `.jsonl` append-only log you build in Milestone 3 is the exact format and approach used in Project 4. When Project 4 says "structured audit log," `.jsonl` fully qualifies — and you already know how to build it.
 
@@ -124,12 +125,12 @@ The patterns you're building here are exactly what Project 4 extends — so it's
 
 **What's new in Project 4:**
 
-- **A second, non-LLM signal.** Project 4 requires at least two *independent* detection signals. The second is stylometric heuristics — statistical properties of text (sentence length variance, vocabulary diversity) computed in pure Python with no API calls. You haven't built this before.
+- **A second, non-LLM signal.** Project 4 requires at least two _independent_ detection signals. The second is stylometric heuristics — statistical properties of text (sentence length variance, vocabulary diversity) computed in pure Python with no API calls. You haven't built this before.
 
-- **Continuous confidence scoring.** RepairSafe outputs a discrete tier: `"safe"`, `"caution"`, or `"refuse"`. Project 4 outputs a confidence score between 0.0 and 1.0. This is a different output type — you're representing *uncertainty*, not just a category. A score of 0.51 and a score of 0.95 should produce meaningfully different user-facing results.
+- **Continuous confidence scoring.** RepairSafe outputs a discrete tier: `"safe"`, `"caution"`, or `"refuse"`. Project 4 outputs a confidence score between 0.0 and 1.0. This is a different output type — you're representing _uncertainty_, not just a category. A score of 0.51 and a score of 0.95 should produce meaningfully different user-facing results.
 
 - **Transparency labels, appeals, rate limiting, Flask API.** These are all genuinely new in Project 4. You haven't seen them in the labs.
 
 ---
 
-*Read this document before opening any spec or code file.*
+_Read this document before opening any spec or code file._
