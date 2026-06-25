@@ -1,7 +1,7 @@
 # Spec: `log_interaction()`
 
 **File:** `auditor.py`
-**Status:** Spec incomplete — fill in all blank fields before implementing
+**Status:** Spec complete — filled in all blank fields before implementing ☑️
 
 ---
 
@@ -37,19 +37,19 @@ _The four required fields are already in the table below. Add at least two more 
 
 _Think about what you'd want to see if you discovered a cluster of 200 logged questions where the classifier was consistently wrong. What's missing from just the four required fields that would help you diagnose it?_
 
-| Field                | Type   | Description                                                                               |
-| -------------------- | ------ | ----------------------------------------------------------------------------------------- |
-| `"timestamp"`        | `str`  | ISO 8601 datetime (UTC) — `datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")` |
-| `"tier"`             | `str`  | Safety tier assigned to this question                                                     |
-| `"question"`         | `str`  | The user's question, truncated to 300 characters                                          |
-| `"response_preview"` | `str`  | First 200 characters of the generated response                                            |
-| `tier_valid`         | `bool` | Whether the tier is valid (in case "unknown")                                             |
-| `question_length`    | `int`  | Number of characters in users question                                                    |
-| `response_length`    | `int`  | Number of characters in response                                                          |
+| Field                  | Type   | Description                                                                               |
+| ---------------------- | ------ | ----------------------------------------------------------------------------------------- |
+| `"timestamp"`          | `str`  | ISO 8601 datetime (UTC) — `datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")` |
+| `"tier"`               | `str`  | Safety tier assigned to this question                                                     |
+| `"question"`           | `str`  | The user's question, truncated to 300 characters                                          |
+| `"response_preview"`   | `str`  | First 200 characters of the generated response                                            |
+| `"tier_valid"` ☑️      | `bool` | Whether the tier is valid (in case "unknown")                                             |
+| `"question_length"` ☑️ | `int`  | Number of characters in users question                                                    |
+| `"response_length"` ☑️ | `int`  | Number of characters in response                                                          |
 
 ---
 
-### Why these truncation limits?
+### Why these truncation limits? ☑️
 
 _The required fields truncate the question to 300 characters and the response to 200. Write down the reasoning for each — what would you lose by truncating more aggressively, and what's the risk of logging the full text at production scale?_
 
@@ -59,7 +59,7 @@ This app's text interaction remains within reasonable limits - no user query or 
 
 ---
 
-### Directory creation
+### Directory creation ☑️
 
 _What happens if `logs/` doesn't exist when the function runs for the first time? How will you handle that — and why is this worth thinking about at all?_
 
@@ -69,7 +69,7 @@ If `logs/` doesn't handle at all, create the directory and a new log file within
 
 ---
 
-### Console output
+### Console output ☑️
 
 _Write an example of what you want the one-line terminal summary to look like after a question is logged. Be specific about format._
 
@@ -79,7 +79,7 @@ _Write an example of what you want the one-line terminal summary to look like af
 
 ---
 
-## Implementation Notes
+## Implementation Notes ☑️
 
 _Fill this in after implementing._
 
