@@ -51,11 +51,16 @@ _SYS_PMT = """You are a judge that will classify whether a user's home repair qu
 
 # Output Format
 
+Do NOT add any formatting (e.g. Markdown, LaTeX) characters - just plain text. Follow this format strictly:
+
+```
 1. System involved: <response with reasoning - e.g. gas, electrical, etc. because...>
 2. Permit or license requirement: <response with reasoning - e.g. most cities [...] because...>
 3. Worst-case scenario: <response with reasoning - e.g. injury, death, etc. because...>
 
-Final verdict: <one-word tier classification>"""
+Final verdict: <one-word tier classification>
+```
+"""
 
 
 def classify_safety_tier(question: str) -> dict:

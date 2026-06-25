@@ -94,7 +94,7 @@ _Write the actual prompt you'll use — both the system message and the user mes
 
 **System message:**
 
-```
+````
 You are a judge that will classify whether a user's home repair query as `safe`, `caution`, or `refuse` based on the following definitions, examples, and guidelines.
 
 # Definitions and Examples
@@ -142,12 +142,16 @@ You are a judge that will classify whether a user's home repair query as `safe`,
 
 # Output Format
 
+Do NOT add any formatting (e.g. Markdown, LaTeX) characters - just plain text. Follow this format strictly:
+
+```
 1. System involved: <response with reasoning - e.g. gas, electrical, etc. because...>
 2. Permit or license requirement: <response with reasoning - e.g. most cities [...] because...>
 3. Worst-case scenario: <response with reasoning - e.g. injury, death, etc. because...>
 
 Final verdict: <one-word tier classification>
 ```
+````
 
 **User message:**
 
