@@ -1,7 +1,7 @@
 # Spec: `generate_safe_response()`
 
 **File:** `responder.py`
-**Status:** Spec incomplete — fill in all blank fields before implementing
+**Status:** Spec complete — filled in all blank fields before implementing ☑️
 
 ---
 
@@ -30,7 +30,7 @@ _Complete the fields below before writing any code. The most important fields ar
 
 ---
 
-### System prompt: "safe" tier
+### System prompt: "safe" tier ☑️
 
 _Write the exact system prompt text for a safe question. It should produce helpful, specific, actionable answers._
 
@@ -40,7 +40,7 @@ You are a helpful home repair expert. Given a safe home repair user question, gi
 
 ---
 
-### System prompt: "caution" tier
+### System prompt: "caution" tier ☑️
 
 _Write the exact system prompt text for a caution question. What safety language should be present? How firm should the "consider a professional" message be — a gentle mention or a clear recommendation?_
 
@@ -50,7 +50,7 @@ You are a home repair expert that is helpful but prioritizes user safety. Given 
 
 ---
 
-### System prompt: "refuse" tier
+### System prompt: "refuse" tier ☑️
 
 _This is the most important one to get right. Write the exact system prompt for refusing to answer._
 
@@ -64,7 +64,7 @@ You are an expert safety advocate specializing in home repair. You are given a u
 
 ---
 
-### Grounding the refuse response
+### Grounding the refuse response ☑️
 
 _The grounding problem from Lab 1 applies here, with higher stakes: even with a strong system prompt, an LLM may "helpfully" provide partial instructions before pivoting to "you should hire a professional." How will you prevent that?_
 
@@ -90,7 +90,7 @@ In all such cases, politely refuse the user query and re-anchor the conversation
 
 ---
 
-### Fallback for unknown tier
+### Fallback for unknown tier ☑️
 
 _What should your function do if it receives a tier value that isn't "safe", "caution", or "refuse" — e.g., "unknown" while the classifier is still a stub? Write the fallback behavior and explain why._
 
@@ -100,7 +100,7 @@ The fallback tier should be "refuse" just in case. The responder's job isn't to 
 
 ---
 
-## Implementation Notes
+## Implementation Notes ☑️
 
 _Fill this in after implementing, before moving to Milestone 3._
 

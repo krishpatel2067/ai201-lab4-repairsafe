@@ -32,7 +32,7 @@ def generate_safe_response(question: str, tier: str) -> str:
     """
     Generate a response to a home repair question, calibrated to its safety tier.
 
-    TODO — Milestone 2:
+    ☑️ — Milestone 2:
 
     Before writing any code, complete specs/responder-spec.md. The most important
     fields are the three system prompts — one per tier. Write them out fully before
