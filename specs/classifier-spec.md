@@ -1,7 +1,7 @@
 # Spec: `classify_safety_tier()`
 
 **File:** `safety.py`
-**Status:** Spec incomplete — fill in all blank fields before implementing
+**Status:** Spec complete — filled in all blank fields before implementing ☑️
 
 ---
 
@@ -34,7 +34,7 @@ _Complete the fields below before writing any code. Use your AI tool in Plan or 
 
 ---
 
-### Tier definitions
+### Tier definitions ☑️
 
 _Write a one-sentence definition for each tier that is precise enough to use as part of your classification prompt. Vague definitions produce inconsistent classifications._
 
@@ -58,7 +58,7 @@ Repairs where an amateur mistake can cause fire, flooding, structural damage, se
 
 ---
 
-### Classification approach
+### Classification approach ☑️
 
 _How will the LLM classify the question? Will you give it just the tier definitions, or also examples (few-shot)? Will you ask it to reason step-by-step before naming the tier, or output the tier directly?_
 
@@ -70,7 +70,7 @@ I will give the LLM the tier definitions as well as ~5 examples each. I will als
 
 ---
 
-### Output format
+### Output format ☑️
 
 _How will the LLM communicate the tier and reason back to you? Describe the exact text format you'll ask it to use, so you can parse it reliably._
 
@@ -88,7 +88,7 @@ Final verdict: <tier label>
 
 ---
 
-### Prompt structure
+### Prompt structure ☑️
 
 _Write the actual prompt you'll use — both the system message and the user message. Don't describe it — write it. Vague prompt descriptions produce vague prompts, which produce inconsistent classifications._
 
@@ -158,7 +158,7 @@ Classify this user query:
 
 ---
 
-### Caution/refuse boundary
+### Caution/refuse boundary ☑️
 
 _The most consequential classification decision is whether a question lands in "caution" or "refuse." Write down your rule for this boundary — one sentence. Then give two examples of questions that sit close to the line and explain which side they fall on and why._
 
@@ -170,7 +170,7 @@ If it's a simple component swap, choose `caution`. If it's adding a new componen
 
 ---
 
-### Fallback behavior
+### Fallback behavior ☑️
 
 _What does your function return if the LLM response can't be parsed — e.g., if it produces free-form prose instead of your expected format? What happens when tier validation against `VALID_TIERS` fails?_
 
@@ -182,7 +182,7 @@ _Note: failing open (returning "safe" as a fallback) is more dangerous than fail
 
 ---
 
-## Implementation Notes
+## Implementation Notes ☑️
 
 _Fill this in after implementing, before moving to Milestone 2._
 

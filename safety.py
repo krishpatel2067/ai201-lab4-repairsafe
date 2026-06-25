@@ -62,7 +62,7 @@ def classify_safety_tier(question: str) -> dict:
     """
     Classify a home repair question into one of three safety tiers.
 
-    TODO — Milestone 1:
+    ☑️ — Milestone 1:
 
     Before writing any code, complete specs/classifier-spec.md. The blank fields
     there are the decisions that drive this implementation — prompt design, tier
